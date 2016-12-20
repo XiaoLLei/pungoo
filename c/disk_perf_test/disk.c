@@ -20,15 +20,15 @@ disk_t* disk_t_create(char* filename, int flag)
         LOG("malloc mem for disk_t failure. filename: %s", filename);
     }
 
+    memset(disk, 0, sizeof(disk_t));
+    strncpy(disk->filename_, filename, MAX_PATH_LEN - 1);
+    disk->flag_ = flag;
+
     disk->open = disk_t_file_open;
     disk->close = disk_t_file_close;
     disk->read = disk_t_file_read;
     disk->write = disk_t_file_write;
     disk->seek = disk_t_file_seek;
-
-    memset(disk, 0, sizeof(disk_t));
-    strncpy(disk->filename_, filename, MAX_PATH_LEN - 1);
-    disk->flag_ = flag;
 
     return disk;
 }
