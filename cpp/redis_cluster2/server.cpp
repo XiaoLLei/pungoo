@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <strings.h>
 #include <unistd.h>
+#include <time.h>
 #include <pthread.h>
 #include <time.h>
 #include <sys/types.h>
@@ -97,7 +98,7 @@ void* thread_loop(void* arg)
         // const char* key = argv[2];
         // const char* nodes = getenv("HOSTS");
         //const char* nodes = "172.18.32.124:7000,172.18.32.124:7001,172.18.32.124:7002,172.18.32.124:7003,172.18.32.124:7004,172.18.32.124:7005";
-        // const char* nodes = "172.18.32.55:7001,172.18.32.55:7002,172.18.32.55:7003,172.18.32.55:7004,172.18.32.55:7005,172.18.32.55:7006";
+        //const char* nodes = "172.18.32.55:7001,172.18.32.55:7002,172.18.32.55:7003,172.18.32.55:7004,172.18.32.55:7005,172.18.32.55:7006";
         const char* nodes = "172.18.32.55:6380";
         if (NULL == nodes)
         {
@@ -129,7 +130,7 @@ void* thread_loop(void* arg)
             // printf("mylist has %d items. %d--%s\n", count, which_node.second, which_node.first.c_str());
             char key[64] = {0};
             snprintf(key, 64, "%d-%ld", thread_id, ++count);
-            redis_client.setex(key, strValue, 1, &which_node);
+            redis_client.setex(key, strValue, 20, &which_node);
             //printf("%s. %d--%s\n", key, which_node.second, which_node.first.c_str());
             //dd//sleep(1);
 
